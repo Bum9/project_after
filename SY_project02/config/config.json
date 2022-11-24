@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "stopups",
+    "password": "rootroot",
     "database": "stopupsDB",
-    "host": "192.168.10.63",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
   },

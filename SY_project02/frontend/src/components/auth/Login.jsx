@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import AxiosInstance from "../../util/Axios";
 
-export const Login = (props) => {
+export const Login = () => {
   console.log(AxiosInstance.createInstance().get(`/login`));
 
   return (

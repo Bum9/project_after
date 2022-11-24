@@ -8,6 +8,11 @@ const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
 const passport = require("passport");
 const test = require("./routes/test");
+const payment = require("./routes/payment");
+const createError = require("http-errors");
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger-output");
 
 dotenv.config({ path: path.join(__dirname, "/.env") });
 
@@ -66,22 +71,33 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use("/", test);
 app.use("/api", test);
 app.use("/test", test);
 app.use("/login", test);
 app.use("/users", test);
+app.use("/payment", payment);
+app.use(function (req, res, next) {
+  next(createError(404));
+});
 app.use("/*", test);
 
 app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
   res.status(err.status || 500);
-  res.render("error");
+  res.render("fail", {
+    code: "UNKNOWN_ERROR",
+    message: "알 수 없는 에러가 발생했습니다.",
+  });
 });
 
 const port = process.env.PORT || 8001;
 //서버 접속 실패시 로그를 뿌리도록 비동기 함수로 세팅
-app.listen(port, () => {
-  console.log(`${port}`, "번 포트에서 대기 중");
-});
+// app.listen(port, () => {
+//   console.log(`${port}`, "번 포트에서 대기 중");
+// });
+
+module.exports = app;
