@@ -8,6 +8,10 @@ module.exports = class Payment extends Sequelize.Model {
           type: Sequelize.INTEGER.UNSIGNED,
           allowNull: false,
         },
+        submitCode: {
+          type: Sequelize.STRING(50),
+          allowNull: false,
+        },
         amount: {
           type: Sequelize.INTEGER.UNSIGNED,
           allowNull: false,
