@@ -10,6 +10,7 @@ const passport = require("passport");
 const test = require("./routes/test");
 const payment = require("./routes/payment");
 const createError = require("http-errors");
+const auth = require("./routes/auth");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger-output");
@@ -78,6 +79,8 @@ app.use("/test", test);
 app.use("/login", test);
 app.use("/users", test);
 app.use("/payment", payment);
+app.use("/p1", test);
+app.use("/join", test);
 app.use(function (req, res, next) {
   next(createError(404));
 });
