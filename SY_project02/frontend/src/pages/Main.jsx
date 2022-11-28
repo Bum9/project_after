@@ -16,6 +16,9 @@ export const Main = (props) => {
       <Link to="/login">
         <button>login</button>
       </Link>
+      <Link to="/loginCheck">
+        <button>login</button>
+      </Link>
     </>
   );
 };

@@ -1,15 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
 
-router.get("/", (req, res) => {
+router.get("/test1/", (req, res) => {
   res.send({ message: "hello root" });
 });
 
 router.get("/api", (req, res) => {
   res.send({ message: "api" });
 });
-router.get("/p1", async (req, res, next) => {
+router.get("/test1", async (req, res, next) => {
   res.send({ message: "p1" });
 });
 
@@ -34,12 +33,6 @@ router.get("/hello", async (req, res, next) => {
   ]);
   console.log(res.json);
 });
-router.get("/join", async (req, res, next) => {
-  const abc = { name: "hello" };
-  const userData = await User.findAll({});
-  console.log(userData);
-  res.send({ data: userData });
-});
 
 router.get("/*", (req, res) => {
   res.status(404).send("not found");
@@ -50,46 +43,29 @@ router.post("/id", (req, res) => {
   const serverId = req.body.id;
   console.log(serverId);
 });
-// router.post("/join", async (req, res, next) => {
-//   // const { email, nick, password } = req.body.data;
-//   try {
-//     // const exUser = await User.findOne({ where: { email } });
-//     // if (exUser) {
-//     //   return res.redirect("/join?error=exist");
-//     // }
-//     // const hash = await bcrypt.hash(password, 12);
-//     // await User.create({
-//     //   email,
-//     //   nick,
-//     //   password: hash,
-//     // });
-//     // return res.redirect("/");
-
-//     console.log(req.body);
-//   } catch (error) {
-//     console.error(error);
-//     return next(error);
-//   }
-// });
 // router.get("/p2", async (req, res, next) => {
 //   res.send({ message: "login" });
 // }); //왜 내려가면 안되는가? 위치를 옮기니까 된다.
 
 router.post("/join", async (req, res) => {
-  const { name, address, password, telephone, email } = req.body.data;
+  res.send({ message: "heelo" });
+  // console.log(req.body.data, " -------->");
+
+  // const { name, address, password, telephone, email } = req.body.data;
 
   try {
-    console.log(req.body.data, " --------> pst");
-    User.create({
-      email,
-      name,
-      password,
-      telephone,
-      address,
-      nickname: "호날두",
-    });
+    // const emailCheck = User.findOne({ where: "a@a.com" });
 
-    console.log(req.body.data, "뭐지?");
+    // createUser = User.create({
+    //   email,
+    //   name,
+    //   nickname: "수세미",
+    //   password,
+    //   telephone,
+    //   address,
+    // });
+
+    console.log(req.body.data);
   } catch {
     (error) => {
       console.error(error);

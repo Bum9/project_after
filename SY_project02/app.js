@@ -11,6 +11,7 @@ const test = require("./routes/test");
 const payment = require("./routes/payment");
 const createError = require("http-errors");
 const auth = require("./routes/auth");
+const test1 = require("./routes/test1");
 
 const swaggerUi = require("swagger-ui-express");
 const swaggerFile = require("./swagger-output");
@@ -80,11 +81,16 @@ app.use("/login", test);
 app.use("/users", test);
 app.use("/payment", payment);
 app.use("/p1", test);
-app.use("/join", test);
+app.use("/hello", test);
+app.use("/", auth);
+app.use("/auth", auth);
+app.use("/test1", test1);
+
 app.use(function (req, res, next) {
   next(createError(404));
 });
 app.use("/*", test);
+app.use("/*", auth);
 
 app.use((err, req, res, next) => {
   res.locals.message = err.message;

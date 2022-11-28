@@ -12,12 +12,13 @@ export const Login = (props) => {
     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,16}$/;
 
   const isName = (value) => userNameCheck.test(value);
-  const isEmail = (value) => emailCheck.test(value) && !test1.includes(value);
+  const isEmail = (value) => emailCheck.test(value);
   const isAddress = (value) => addressCheck.test(value);
   const isPhone = (value) => phoneNumberCheck.test(value);
   const isPassword = (value) => passwordCheck.test(value);
   const isPasswordCheck = (value) => passwordValue === value;
   const [test1, settest1] = useState();
+  const [isCheck, setIsCheck] = useState(false);
   useEffect(() => {
     axios
       .get("http://localhost:8001/join", {})
@@ -30,7 +31,7 @@ export const Login = (props) => {
         for (var i = 0; i < result.length; i++) {
           emailData.push(result[i].email);
         }
-        console.log();
+
         console.log(emailData, test1);
         return settest1(emailData);
       });
@@ -90,7 +91,8 @@ export const Login = (props) => {
     addressIsValid &&
     emailIsValid & phoneIsValid &&
     passwordIsValid &&
-    passwordCheckIsValid
+    passwordCheckIsValid &&
+    isCheck
   ) {
     formIsValid = true;
   }
@@ -115,13 +117,14 @@ export const Login = (props) => {
       telephone: phoneValue,
       email: emailValue,
     };
-    console.log(test1);
-    // axios
-    //   .post("http://localhost:8001/auth/join", {
-    //     data,
-    //   })
-    //   .then((res) => res.data);
-    console.log(test1);
+    console.log(data);
+
+    axios
+      .post("http://localhost:8001/join", {
+        data,
+      })
+      .then((res) => res);
+
     event.preventDefault();
 
     if (!formIsValid) {
@@ -133,6 +136,23 @@ export const Login = (props) => {
     restphone();
     restpassword();
     restpasswordCheck();
+  };
+
+  const checkForm = (e) => {
+    e.preventDefault();
+    if (test1.includes(emailValue)) {
+      alert("중복된 이메일입니다.");
+      console.log(test1.includes(emailValue));
+    } else {
+      alert("중복확인되었습니다. 회원가입을 완료해주세요");
+      setIsCheck(true);
+    }
+
+    // const p1 = test1.includes(emailValue);
+    // console.log(isEmail(emailValue));
+    // console.log(test1, emailValue, p1);
+    // !p1 ? alert("사용 가능한 이메일 입니다.") : alert("중복된 이메일 입니다.");
+    // console.log("hello");
   };
 
   return (
@@ -205,6 +225,9 @@ export const Login = (props) => {
             {emailHasError && (
               <p className="error-text"> 이메일을 확인해주세요!.</p>
             )}
+            <button disabled={!isEmail(emailValue)} onClick={checkForm}>
+              중복확인
+            </button>
           </div>
           <div className={phoneClasses}>
             <label htmlFor="name">휴대전화(-제외)</label>

@@ -6,6 +6,6 @@ const testRouter = require("./test");
 
 const router = express.Router();
 
-router.route("/test");
+router.route("/auth");
 
 module.exports = router;

@@ -1,35 +1,45 @@
 const express = require("express");
 const passport = require("passport");
-// const { isLoggedIn, isNotLoggedIn } = require("../middlewares");
-// const bcrypt = require("bcrypt");
-// const User = require("../models/user");
+const { isLoggedIn, isNotLoggedIn } = require("../middlewares/loggedIn");
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
 
 const router = express.Router();
+router.get("/", async (req, res, next) => {
+  const abc = { name: "hello" };
+  // const userData = await User.findAll({});
+  console.log(userData);
+  res.send(abc);
+});
 router.get("/join", async (req, res, next) => {
   const abc = { name: "hello" };
   const userData = await User.findAll({});
   console.log(userData);
   res.send({ data: userData });
 });
-// router.post("/join", isNotLoggedIn, async (req, res, next) => {
-//   const { email, nick, password } = req.body;
-//   try {
-//     const exUser = await User.findOne({ where: { email } });
-//     if (exUser) {
-//       return res.redirect("/join?error=exist");
-//     }
-//     const hash = await bcrypt.hash(password, 12);
-//     await User.create({
-//       email,
-//       nick,
-//       password: hash,
-//     });
-//     return res.redirect("/");
-//   } catch (error) {
-//     console.error(error);
-//     return next(error);
-//   }
-// });
+router.get("/*", (req, res) => {
+  res.status(404).send("not found");
+  res.send(console.log("404"));
+});
+router.post("/join", isNotLoggedIn, async (req, res, next) => {
+  // const { email, nick, password } = req.body;
+  // try {
+  //   const exUser = await User.findOne({ where: { email } });
+  //   if (exUser) {
+  //     return res.redirect("/join?error=exist");
+  //   }
+  //   const hash = await bcrypt.hash(password, 12);
+  //   await User.create({
+  //     email,
+  //     nick,
+  //     password: hash,
+  //   });
+  //   return res.redirect("/");
+  // } catch (error) {
+  //   console.error(error);
+  //   return next(error);
+  // }
+});
 
 // router.post("/login", isNotLoggedIn, (req, res, next) => {
 //   passport.authenticate("local", (authError, user, info) => {

@@ -2,6 +2,7 @@ import { useState, useReducer } from "react";
 const initialInputState = {
   value: "",
   isTouched: false,
+  isDoubleCheck: false,
 };
 const inputStateReducer = (state, action) => {
   if (action.type === "INPUT") {
@@ -12,7 +13,11 @@ const inputStateReducer = (state, action) => {
     return { isTouched: true, value: state.value };
   }
   if (action.type === "RESET") {
-    return { isTouched: false, value: state.value };
+    return { isTouched: false, value: "" };
+  }
+
+  if (action.type === "CHECK") {
+    return { isTouched: false, value: state.value, isDoubleCheck: true };
   }
   return initialInputState;
 };
@@ -37,11 +42,16 @@ const useInput = (validateValue) => {
     dispatch({ type: "RESET" });
   };
 
+  const DoubleCheckHandler = (event) => {
+    dispatch({ type: "CHECK" });
+  };
+
   return {
     value: inputState.value,
     isValid: valueIsValid,
     valueChangeHandler,
     inputBlurHandler,
+    DoubleCheckHandler,
     hasError,
     reset,
   };
