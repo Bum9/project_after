@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useInput from "../../hooks/use-input";
-import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginCheck = () => {
   const [email, setEmail] = useState("");

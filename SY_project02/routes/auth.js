@@ -3,7 +3,6 @@ const passport = require("passport");
 const { isLoggedIn, isNotLoggedIn } = require("../middlewares/loggedIn");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-
 const router = express.Router();
 router.get("/", async (req, res, next) => {
   const abc = { name: "hello" };
@@ -11,7 +10,7 @@ router.get("/", async (req, res, next) => {
   console.log(userData);
   res.send(abc);
 });
-router.get("/join", async (req, res, next) => {
+router.get("/fuckme", async (req, res, next) => {
   const abc = { name: "hello" };
   const userData = await User.findAll({});
   console.log(userData);

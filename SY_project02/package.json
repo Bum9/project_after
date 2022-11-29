@@ -33,6 +33,7 @@
     "passport-local": "^1.0.0",
     "sequelize": "^6.25.5",
     "sequelize-cli": "^6.5.2",
+    "styled-components": "^5.3.6",
     "swagger-autogen": "^2.22.0",
     "swagger-ui-express": "^4.6.0",
     "uuid": "^9.0.0"
