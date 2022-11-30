@@ -149,6 +149,15 @@ export const Login = (props) => {
       setIsCheck(true);
     }
 
+    const test = async () => {
+      const res = await axios.get(
+        "http://192.168.10.63:8080/api/?apikey=TeamYN1669793293427&Category=분류&Name="
+      );
+      console.log(res.data);
+    };
+
+    test();
+
     // const p1 = test1.includes(emailValue);
     // console.log(isEmail(emailValue));
     // console.log(test1, emailValue, p1);
