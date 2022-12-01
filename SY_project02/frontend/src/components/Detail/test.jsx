@@ -25,14 +25,19 @@ export const Main = styled.div`
 export const MainInner = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+
   width: 716px;
   height: 60px;
   border: 1px solid #ddd;
   border-top: 0px;
   border-left: 0px;
-
   border-right: 0px;
+  p,
+  img {
+    font-size: 18px;
+    padding-bottom: 30px;
+  }
 `;
 export const MainInnerCheckBox = styled.div`
   height: 50px;
@@ -40,7 +45,9 @@ export const MainInnerCheckBox = styled.div`
 `;
 export const FirstContainer = styled.div`
   background-color: #fff;
-  height: 255px;
+  height: ${(props) => props.height + "px"};
+  ${(props) => props.width + "px"}
+
   width: 716px;
   overflow: hidden;
   padding: 30px 30px 0 30px;
@@ -80,53 +87,124 @@ export const SmallBoxContanier = styled.div`
   width: 768px;
   display: flex;
   justify-content: space-between;
+  background-color: #fff;
+  height: 40px;
+  margin-bottom: 11px;
 `;
 export const SmallBox = styled.div`
-  background: #666
-    url("http://image.istarbucks.co.kr/common/img/menu/icon_pic_on.png") 9px
-    center no-repeat;
-
-  color: #ddd;
-
-  width: 69px;
+  background: #fff url(${(props) => props.url}) 9px center no-repeat;
+  background-color: ${(props) => props.backgroundColor};
+  color: #fff;
+  width: ${(props) => props.width + "px"};
   height: 28px;
   line-height: 26px;
   font-size: 12px;
   border: 1px solid #666;
   border-radius: 3px;
   padding: 0 9px 0 25px;
-  margin-right: 8px;
+  margin-right: 15px;
+  margin-top: 10px;
+  text-decoration: ${(props) => props.underline};
 `;
-export const SmallBox1 = styled.div`
-  background: #fff url("//image.istarbucks.co.kr/common/img/menu/icon_ante.png")
-    9px center no-repeat;
-
-  color: #666;
-
-  width: 80px;
-  height: 28px;
-  line-height: 26px;
-  font-size: 12px;
-  border: 1px solid #666;
+export const ClassificationList = styled.div`
+  display: flex;
+  align-items: center;
+  width: 250px;
+  padding-right: 10px;
+  height: 38px;
+  border: 1px solid #ddd;
   border-radius: 3px;
-  padding: 0 9px 0 25px;
-`;
-export const SmallBox2 = styled.div`
-  background: #666
-    url("http://image.istarbucks.co.kr/common/img/menu/icon_pic_on.png") 9px
-    center no-repeat;
-
-  color: #ddd;
-
-  width: 67px;
-  height: 26px;
-  line-height: 26px;
-  font-size: 11px;
-  border: 1px solid #666;
-  border-radius: 3px;
-  padding: 0 9px 0 25px;
+  text-indent: 10px;
+  text-align: left;
+  font-size: 16px;
+  color: #444;
+  overflow: hidden;
   margin-left: auto;
+  z-index: -2;
+  background-color: white;
 `;
+export const ClassificationBox = styled(ClassificationList)`
+  background: url(//image.istarbucks.co.kr/common/img/util/sbox_arrow_down.png)
+    96% center no-repeat #fff;
+`;
+export const ClassificationContainer = styled.div`
+  margin-left: auto;
+  overflow: ${(props) => props.size};
+`;
+export const ColorBox = styled.div`
+  padding: 20px;
+  background: #f4f4f2;
+  margin-bottom: 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  width: 728px;
+  height: 18px;
+  background-color: #f4f4f2;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  a {
+    line-height: 18px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    cursor: pointer;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  img {
+    width: 45px;
+    height: 35.516px;
+    margin-right: 5px;
+  }
+  span {
+    line-height: 18px;
+    margin-left: 5px;
+    font-size: 13px;
+    color: #444444;
+    letter-spacing: -1px;
+  }
+`;
+
+export const CardTest = styled.div`
+  width: 768;
+  background-color: #2a12;
+`;
+export const CardContainer = styled.div`
+  width: 225px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 20px;
+`;
+export const CardList = styled.div`
+  width: 768px;
+  margin-top: 10px;
+  display: flex;
+
+  flex-wrap: wrap;
+`;
+export const Card = styled.div`
+  width: 225px;
+  height: 248px;
+  background: #7bbce0 url(${(props) => props.url}) center no-repeat;
+  background-size: cover;
+
+  color: #fff;
+`;
+
+export const CardText = styled.div`
+  font-size: 14px;
+  color: #444;
+  height: 54px;
+  line-height: 54px;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 export function BasicButtons() {
   return (
     <Stack spacing={2} direction="row">
