@@ -6,6 +6,7 @@ import { Login } from "./components/auth/Login";
 import { Users } from "./pages/Users";
 import LoginCheck from "./components/auth/LoginCheck";
 import Detail from "./components/Detail/Detail";
+import DetailEach from "./components/DetailEach/DetailEach";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/*" element={<NotFound />} />
         <Route path="/loginCheck" element={<LoginCheck name={"login"} />} />
         <Route path="/detail" element={<Detail name={"detail"} />} />
+        <Route path="/detail/1" element={<DetailEach name={"detailEach"} />} />
       </Routes>
     </BrowserRouter>
   );

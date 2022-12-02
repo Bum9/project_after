@@ -12,12 +12,13 @@ export const Main = styled.div`
   flex-direction: column;
   width: 800px;
   margin: 0;
-  padding: 0;
+  padding: 10px;
+  box-sizing: border-box;
   border: 0;
   font-size: 100%;
 
   h1 {
-    margin-right: 700px;
+    margin-right: 650px;
   }
   //
 `;
@@ -67,9 +68,10 @@ export const CategoryBox = styled.div`
   font-family: "nbg", "맑은 고딕", HelveticaNeue, DroidSans, Sans-serif,
     Helvetica;
 `;
-export const ButtonBox = styled.div`
+export const ButtonBoxCotainer = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
+  display: flex;
 `;
 
 export const CheckBox = styled.div`
@@ -86,7 +88,7 @@ export const CheckBox = styled.div`
 export const SmallBoxContanier = styled.div`
   width: 768px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: #fff;
   height: 40px;
   margin-bottom: 11px;
@@ -104,6 +106,7 @@ export const SmallBox = styled.div`
   padding: 0 9px 0 25px;
   margin-right: 15px;
   margin-top: 10px;
+
   text-decoration: ${(props) => props.underline};
 `;
 export const ClassificationList = styled.div`
@@ -121,6 +124,8 @@ export const ClassificationList = styled.div`
   overflow: hidden;
   margin-left: auto;
   z-index: -2;
+
+  accent-color: hsl(228, 4%, 24%);
   background-color: white;
 `;
 export const ClassificationBox = styled(ClassificationList)`
@@ -129,6 +134,7 @@ export const ClassificationBox = styled(ClassificationList)`
 `;
 export const ClassificationContainer = styled.div`
   margin-left: auto;
+
   overflow: ${(props) => props.size};
 `;
 export const ColorBox = styled.div`

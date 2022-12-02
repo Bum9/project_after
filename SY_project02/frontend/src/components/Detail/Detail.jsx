@@ -5,7 +5,7 @@ import {
   MainInner,
   CategoryBox,
   CheckBox,
-  ButtonBox,
+  ButtonBoxCotainer,
   SmallBoxContanier,
   SmallBox,
   ClassificationBox,
@@ -17,6 +17,7 @@ import {
   CardList,
   ClassificationList,
 } from "./test";
+import { ButtonBox } from "./Button";
 import Nutrition from "./nutrition";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -27,10 +28,9 @@ const Detail = () => {
   const [ClassificationInValid, setClassificationInValid] = useState(true);
   const [DetailBox, setDetailBox] = useState(true);
   const [smallBox, setSmallBox] = useState(true);
-  const p1 = () => {
-    alert("hello");
-  };
-  let sizeform = "";
+  const [hidden, setHidden] = useState("hidden");
+  const [categoryTheme, setCategoryThema] = useState(false);
+
   const classificationInValidHandler = () => {
     setClassificationInValid(!ClassificationInValid);
   };
@@ -39,13 +39,21 @@ const Detail = () => {
   };
   const smallBoxTrueHanlder = () => {
     setSmallBox(true);
+    setHidden("hidden");
   };
   const smallBoxFalseHanlder = () => {
     setSmallBox(false);
+    setHidden("");
   };
   const checkboxHandler = () => {
-    sizeform = "hidden";
-    console.log(sizeform);
+    setDetailBox(false);
+  };
+
+  const categoryThemaTrueHandler = () => {
+    setCategoryThema(true);
+  };
+  const categoryThemaFalseHandler = () => {
+    setCategoryThema(false);
   };
 
   return (
@@ -64,7 +72,7 @@ const Detail = () => {
               />
             </MainInner>
             <CategoryBox>
-              <ButtonBox>
+              <ButtonBoxCotainer>
                 <Stack spacing={1} direction="row">
                   <Button
                     variant="contained"
@@ -77,7 +85,7 @@ const Detail = () => {
                     테마
                   </Button>
                 </Stack>
-              </ButtonBox>
+              </ButtonBoxCotainer>
 
               <CheckBox>
                 <CheckboxLabels label="전체 상품보기" />
@@ -102,33 +110,61 @@ const Detail = () => {
               />
             </MainInner>
             <CategoryBox>
-              <ButtonBox>
-                <Stack spacing={1} direction="row">
-                  <Button
-                    variant="contained"
-                    size="large"
-                    sx={{ width: 200 /* background: "grey" */ }}
-                  >
-                    카테고리
-                  </Button>
-                  <Button variant="contained" size="large" sx={{ width: 200 }}>
-                    테마
-                  </Button>
-                </Stack>
-              </ButtonBox>
+              {categoryTheme ? (
+                <>
+                  <ButtonBoxCotainer>
+                    <ButtonBox
+                      onClick={categoryThemaTrueHandler}
+                      background="#006633"
+                      color="#fff"
+                      underline="underline"
+                    >
+                      <span>카테고리</span>
+                    </ButtonBox>
+                    <ButtonBox
+                      onClick={categoryThemaFalseHandler}
+                      background="#f4f4f1"
+                    >
+                      <span>테마</span>
+                    </ButtonBox>
+                  </ButtonBoxCotainer>
 
-              {
-                <CheckBox>
-                  <CheckboxLabels label="전체 상품보기" />
-                  <CheckboxLabels label="콜드 브루 커피" />
-                  <CheckboxLabels label="브루드 커피" />
-                  <CheckboxLabels label="에소프레소" />
-                  <CheckboxLabels label="프라푸치노" />
-                  <CheckboxLabels label="블렌디드" />
-                  <CheckboxLabels label="스타벅스 리프레셔" />
-                  <CheckboxLabels label="스타벅스 피지오" />
-                </CheckBox>
-              }
+                  <CheckBox>
+                    <CheckboxLabels label="전체 상품보기" />
+                    <CheckboxLabels label="콜드 브루 커피" />
+                    <CheckboxLabels label="브루드 커피" />
+                    <CheckboxLabels label="에소프레소" />
+                    <CheckboxLabels label="프라푸치노" />
+                    <CheckboxLabels label="블렌디드" />
+                    <CheckboxLabels label="스타벅스 리프레셔" />
+                    <CheckboxLabels label="스타벅스 피지오" />
+                  </CheckBox>
+                </>
+              ) : (
+                <>
+                  <ButtonBoxCotainer>
+                    <ButtonBox
+                      onClick={categoryThemaTrueHandler}
+                      background="#f4f4f1"
+                    >
+                      <span>카테고리</span>
+                    </ButtonBox>
+                    <ButtonBox
+                      onClick={categoryThemaFalseHandler}
+                      background="#006633"
+                      color="#fff"
+                      underline1="underline"
+                    >
+                      <span>테마</span>
+                    </ButtonBox>
+                  </ButtonBoxCotainer>
+
+                  <img
+                    alt="이미지가 없습니다"
+                    src="https://image.istarbucks.co.kr/upload/banner/themebnr/jAVzia_20221201102659366.jpg"
+                  />
+                </>
+              )}
             </CategoryBox>
           </FirstContainer>
         )}
@@ -177,27 +213,35 @@ const Detail = () => {
           )}
 
           {DetailBox ? (
-            <ClassificationContainer onClick={detailBoxHandler} size={sizeform}>
-              <ClassificationBox>상세 분류</ClassificationBox>
+            <ClassificationContainer size="hidden" hidden={hidden}>
+              <ClassificationBox onClick={detailBoxHandler}>
+                상세 분류
+              </ClassificationBox>
+              <ClassificationList onClick={checkboxHandler}>
+                <input type="checkbox" id="name" />
+                신규 출시된 메뉴
+              </ClassificationList>
               <ClassificationList onClick={checkboxHandler}>
                 <input type="checkbox" />
-                <label> 신규 출시된 메뉴</label>
-              </ClassificationList>
-              <ClassificationList onClick={checkboxHandler} size={sizeform}>
-                <input type="checkbox" className="t1" />
-                <label for="t1"> 시즌기간 출시되는 시즌성11 메뉴</label>
+                시즌기간 출시되는 시즌성 메뉴
               </ClassificationList>
             </ClassificationContainer>
           ) : (
-            <ClassificationContainer onClick={detailBoxHandler} size={sizeform}>
-              <ClassificationBox>상세 분류</ClassificationBox>
+            <ClassificationContainer>
+              <ClassificationBox onClick={detailBoxHandler}>
+                상세 분류
+              </ClassificationBox>
               <ClassificationList onClick={checkboxHandler}>
-                <input type="checkbox" className="t1" />
-                <label for="t1"> 신규 출시된 메뉴1</label>
+                <label htmlFor="new">
+                  <input type="checkbox" id="new" />
+                  신규 출시된 메뉴
+                </label>
               </ClassificationList>
               <ClassificationList onClick={checkboxHandler}>
-                <input type="checkbox" />
-                <label> 시즌기간 출시되는 시즌성 메뉴</label>
+                <label htmlFor="season">
+                  <input type="checkbox" id="season" />
+                  시즌기간 출시되는 시즌성 메뉴
+                </label>
               </ClassificationList>
             </ClassificationContainer>
           )}
